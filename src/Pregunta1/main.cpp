@@ -89,18 +89,37 @@ int main(int argc, char const *argv[]){
     int i = 0; // posicion piedra actual
     while( i + 1 < cantidad + 2 ){ // mientras no este en la ultima piedra
         if(camino[i + 1].getTipo() == "D"){ // si me quedan 2 piedras y entremedio tengo una chica, termino
+            // cout << camino[i].getTipo() << " " << i << " ";
+            // cout << camino[i+1].getTipo() << " " << i+1 << " ";
+            // cout << "distancia: " << abs(camino[i+1].getDistancia() - camino[i].getDistancia()) << endl;
+            
             distancia = mayor(distancia, camino[i], camino[i + 1]);
-            i = i + 1;
+            i ++;
         }
-        // planteamos la condicion del Dani:
-        else if(camino[i + 1].getTipo() == "P" && camino[i + 2].getTipo() == "P"){
+        // planteamos las condiciones del Dani:
+        else if(camino[i + 1].getTipo() == "P" && camino[i + 2].getTipo() == "P"){ // dos siguientes chicos
             camino[i + 2].seHundio(); // me muevo 2 posiciones
+            
+            // cout << camino[i].getTipo() << " " << i << " ";
+            // cout << camino[i+2].getTipo() << " " << i+2 << " ";
+            // cout << "distancia: " << abs(camino[i+2].getDistancia() - camino[i].getDistancia()) << endl;
             distancia = mayor(distancia, camino[i], camino[i+2]);
             i = i + 2;
-        } else{ // sino me muevo 1
-            if(camino[i + 1].getTipo() == "P"){
-                camino[i + 1].seHundio();
-            }
+        } 
+        else if(camino[i + 1].getTipo() == "P"){ // si el siguiente es pequeño, entonces me muevo a la subsiguiente
+
+            // cout << camino[i].getTipo() << " " << i << " ";
+            // cout << camino[i+2].getTipo() << " " << i+2 << " ";
+            // cout << "distancia: " << abs(camino[i+2].getDistancia() - camino[i].getDistancia()) << endl;
+            distancia = mayor(distancia, camino[i], camino[i+2]);
+            i = i + 2;
+        }
+        else{ // sino me muevo 1
+
+            // cout << camino[i].getTipo() << " " << i << " ";
+            // cout << camino[i+1].getTipo() << " " << i+1 << " ";
+            // cout << "distancia: " << abs(camino[i+1].getDistancia() - camino[i].getDistancia()) << endl;
+            
             distancia = mayor(distancia, camino[i], camino[i+1]);
             i++;
         }
@@ -112,6 +131,10 @@ int main(int argc, char const *argv[]){
         // si la piedra no esta hundida, la recorro
         otro = i-1;
         while(otro - 1 >= 0 && camino[otro].estaHundida()) otro --; // busco hasta obtener una piedra que no este hundida
+
+        // cout << camino[i].getTipo() << " " << i << " ";
+        // cout << camino[otro].getTipo() << " " << otro << " ";
+        // cout << "distancia: " << abs(camino[otro].getDistancia() - camino[i].getDistancia()) << endl;
         distancia = mayor(distancia, camino[i], camino[otro]);
         i = otro;
     }
