@@ -5,27 +5,28 @@ using namespace std;
 class Piedra
 {
   private:
-    int tipo; // 0: pequeña ; 1: grande
+    char tipo; // P: pequeña ; G: grande
     bool hunde;
     int distancia;
 
   public:
     Piedra();
-    Piedra(int tipo, int distancia);
+    Piedra(char tipo, int distancia);
     ~Piedra();
     int getDistancia();
+    char getTipo();
     bool estaHundida();
     void seHundio();
 };
 
 Piedra::Piedra()
 {
-    this->tipo = 0;
+    this->tipo = ' ';
     this->distancia = 0;
     this->hunde = false;
 }
 
-Piedra::Piedra(int tipo, int distancia)
+Piedra::Piedra(char tipo, int distancia)
 {
     this->tipo = tipo;
     this->distancia = distancia;
@@ -35,6 +36,11 @@ Piedra::Piedra(int tipo, int distancia)
 int Piedra::getDistancia()
 {
     return this->distancia;
+}
+
+char Piedra::getTipo()
+{
+    return this->tipo;
 }
 
 bool Piedra::estaHundida()
