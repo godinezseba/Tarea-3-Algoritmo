@@ -62,15 +62,22 @@ int mayor(int distancia, Piedra A, Piedra B){
     }
 }
 
+void printRuteo(int a, int b,Piedra camino[]){
+    cout << camino[a].getTipo() << " " << a << " ";
+    cout << camino[b].getTipo() << " " << b << " ";
+    cout << "distancia: " << abs(camino[b].getDistancia() - camino[a].getDistancia()) << endl;
+            
+}
+
 int main(int argc, char const *argv[]){
     int cantidad, distanciatotal;
     string cadena;
     string temptipo;
     int tempdist;
-    Piedra camino[cantidad + 2];
-
     // solicito datos:
     cin >> cantidad >> distanciatotal;
+    Piedra camino[cantidad + 2];
+
     for(int i = 1; i <= cantidad; i++){
         cin >> cadena;
         temptipo = cadena.at(0);
@@ -81,7 +88,8 @@ int main(int argc, char const *argv[]){
     camino[0] = Piedra("I", 0);
     camino[cantidad + 1] = Piedra("D", distanciatotal);
     // for(int i = 0; i < cantidad+2; i++){
-    //     cout << camino[i].getDistancia() << " " << camino[i].getTipo() << endl;
+    //     cout << camino[i].getDistancia() << " " << camino[i].getTipo();
+    //     cout << " pos: " << i << endl;
     // }
     
     int distancia = abs(camino[1].getDistancia() - camino[0].getDistancia());
@@ -89,52 +97,38 @@ int main(int argc, char const *argv[]){
     int i = 0; // posicion piedra actual
     while( i + 1 < cantidad + 2 ){ // mientras no este en la ultima piedra
         if(camino[i + 1].getTipo() == "D"){ // si me quedan 2 piedras y entremedio tengo una chica, termino
-            // cout << camino[i].getTipo() << " " << i << " ";
-            // cout << camino[i+1].getTipo() << " " << i+1 << " ";
-            // cout << "distancia: " << abs(camino[i+1].getDistancia() - camino[i].getDistancia()) << endl;
-            
+            // printRuteo(i, i+1, camino);
             distancia = mayor(distancia, camino[i], camino[i + 1]);
             i ++;
         }
         // planteamos las condiciones del Dani:
         else if(camino[i + 1].getTipo() == "P" && camino[i + 2].getTipo() == "P"){ // dos siguientes chicos
             camino[i + 2].seHundio(); // me muevo 2 posiciones
-            
-            // cout << camino[i].getTipo() << " " << i << " ";
-            // cout << camino[i+2].getTipo() << " " << i+2 << " ";
-            // cout << "distancia: " << abs(camino[i+2].getDistancia() - camino[i].getDistancia()) << endl;
+            // printRuteo(i, i+2, camino);
             distancia = mayor(distancia, camino[i], camino[i+2]);
             i = i + 2;
         } 
         else if(camino[i + 1].getTipo() == "P"){ // si el siguiente es pequeño, entonces me muevo a la subsiguiente
-
-            // cout << camino[i].getTipo() << " " << i << " ";
-            // cout << camino[i+2].getTipo() << " " << i+2 << " ";
-            // cout << "distancia: " << abs(camino[i+2].getDistancia() - camino[i].getDistancia()) << endl;
+            // printRuteo(i, i+2, camino);
             distancia = mayor(distancia, camino[i], camino[i+2]);
             i = i + 2;
         }
         else{ // sino me muevo 1
-
-            // cout << camino[i].getTipo() << " " << i << " ";
-            // cout << camino[i+1].getTipo() << " " << i+1 << " ";
-            // cout << "distancia: " << abs(camino[i+1].getDistancia() - camino[i].getDistancia()) << endl;
-            
+            // printRuteo(i, i+1, camino);
             distancia = mayor(distancia, camino[i], camino[i+1]);
             i++;
         }
     }
+    // cout << "de vuelta" << endl;
     // CALCULO DE VUELTA:
-    i = cantidad + 1; // analizo desde el extremo derecho
+    i = cantidad; // analizo desde el extremo derecho
     int otro; // posicion de la otra piedra
     while(i-1 >= 0){ // mientras este en una piedra y no en el extremo izquierdo
         // si la piedra no esta hundida, la recorro
         otro = i-1;
         while(otro - 1 >= 0 && camino[otro].estaHundida()) otro --; // busco hasta obtener una piedra que no este hundida
-
-        // cout << camino[i].getTipo() << " " << i << " ";
-        // cout << camino[otro].getTipo() << " " << otro << " ";
-        // cout << "distancia: " << abs(camino[otro].getDistancia() - camino[i].getDistancia()) << endl;
+        
+        // printRuteo(i, i+1, camino);
         distancia = mayor(distancia, camino[i], camino[otro]);
         i = otro;
     }
