@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 
 using namespace std;
 
@@ -55,7 +56,12 @@ void Piedra::seHundio()
 
 main(int argc, char const *argv[])
 {
-    cout << "Hola Mundo" << endl;
+    int cantidad, distancia;
+    string cadena;
+    cin >> cantidad >> distancia;
+    getline(cin, cadena);
 
+    cout << cantidad << " " << distancia << endl;
+    cout << cadena << endl;
     return 0;
 }
