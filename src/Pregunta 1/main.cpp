@@ -5,15 +5,24 @@ using namespace std;
 class Piedra
 {
   private:
-    int tipo;
+    int tipo; // 0: pequeña ; 1: grande
     bool hunde;
     int distancia;
 
   public:
+    Piedra();
     Piedra(int tipo, int distancia);
+    ~Piedra();
     int getDistancia();
     bool estaHundida();
     void seHundio();
+};
+
+Piedra::Piedra()
+{
+    this->tipo = 0;
+    this->distancia = 0;
+    this->hunde = false;
 }
 
 Piedra::Piedra(int tipo, int distancia)
