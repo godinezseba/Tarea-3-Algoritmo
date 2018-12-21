@@ -10,4 +10,4 @@ run2:
 vald:
 	valgrind ./main < input/input.txt
 check:
-valgrind --leak-check=full --show-leak-kinds=all src/main < input/input.txt
+	valgrind --leak-check=full --show-leak-kinds=all src/main < input/input.txt

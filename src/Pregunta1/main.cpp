@@ -54,7 +54,7 @@ void Piedra::seHundio()
     this->hunde = true;
 }
 
-main(int argc, char const *argv[])
+int main(int argc, char const *argv[])
 {
     int cantidad, distancia;
     string cadena;
