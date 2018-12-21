@@ -134,6 +134,5 @@ int main(int argc, char const *argv[]){
     }
     // imprimo el resultado
     cout << distancia << endl;
-
     return 0;
 }
