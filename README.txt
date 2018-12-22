@@ -1,7 +1,7 @@
 #Nombres:
--Francisco Abarca 2016735
--Sebastian Godinez 201673520-8
--Daniel Toro 2016735
+Francisco Abarca  201673552-6
+Sebastián Godinez 201673520-8
+Daniel Toro 201673595-k
 
 #Ejecucion:
 Asumiendo que la terminal esta en la misma carpeta que este archivo:
